@@ -282,7 +282,7 @@ if you do need to customize or add a new loader, this is where you would go.
 
 Webpack enables the use of loaders to preprocess files. This allows you to
 bundle any static resource way beyond JavaScript. All base loaders
-that ships with webpacker are located inside `config/webpack/loaders`.
+that ship with webpacker are located inside `config/webpack/loaders`.
 
 If you want to add a new loader, for example, to process `json` files via webpack:
 
@@ -315,7 +315,7 @@ or whatever path you set for `source_entry_path` in the `webpacker.yml` configur
 is turned into their own output files (or entry points, as Webpack calls it).
 
 Suppose you want to change the source directory from `app/javascript`
-to `frontend` and output to `assets/packs` this is how you would do it:
+to `frontend` and output to `assets/packs`. This is how you would do it:
 
 ```yml
 # config/webpacker.yml
@@ -324,7 +324,7 @@ source_entry_path: packs
 public_output_path: assets/packs # outputs to => public/assets/packs
 ```
 
-Similary you can also control and configure `webpack-dev-server` settings from `config/webpacker.yml` file:
+Similarly you can also control and configure `webpack-dev-server` settings from `config/webpacker.yml` file:
 
 ```yml
 # config/webpacker.yml
@@ -398,6 +398,18 @@ plugins:
 
 Webpacker out-of-the-box provides CDN support using your Rails app `config.action_controller.asset_host` setting. If you already have [CDN](http://guides.rubyonrails.org/asset_pipeline.html#cdns) added in your rails app
 you don't need to do anything extra for webpacker, it just works.
+
+### HTTPS in development
+
+If you're using the `webpack-dev-server` in development, you can serve your packs over HTTPS
+by setting the `https` option for `webpack-dev-server` to `true` in `config/webpacker.yml`,
+then start the dev server as usual with `./bin/webpack-dev-server`.
+
+Please note that the `webpack-dev-server` will use a self-signed certificate,
+so your web browser will display a warning/exception upon accessing the page. If you get
+`https://localhost:3035/sockjs-node/info?t=1503127986584 net::ERR_INSECURE_RESPONSE`
+in your console, simply open the link in your browser and accept the SSL exception.
+Now if you refresh your rails view everything should work as expected.  
 
 ### Hot module replacement
 
@@ -636,7 +648,7 @@ Now, modify your Vue app to expect the properties.
     // A child component needs to explicitly declare
     // the props it expects to receive using the props option
     // See https://vuejs.org/v2/guide/components.html#Props
-    props: ["message","name"], 
+    props: ["message","name"],
     data: function () {
       return {
           test: 'This will display: ',
@@ -768,7 +780,7 @@ You can use yarn to add bootstrap or any other modules available on npm:
 yarn add bootstrap
 ```
 
-Import Bootstrap and theme(optional) CSS in your app/javascript/packs/app.js file:
+Import Bootstrap and theme (optional) CSS in your app/javascript/packs/app.js file:
 
 ```js
 import 'bootstrap/dist/css/bootstrap'
